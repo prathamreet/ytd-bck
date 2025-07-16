@@ -3,11 +3,11 @@ const express = require('express');
 const ytdl = require('ytdl-core');
 const cors = require('cors');
 const app = express();
-const PORT = process.env.PORT || 5000; // Render uses PORT environment variable
+const PORT = process.env.PORT || 5000;
 
 app.use(express.json());
 app.use(cors({
-  origin: 'https://*.render.com', // Adjust based on your extension's origin if needed
+  origin: 'https://www.youtube.com', // Explicitly allow YouTube's origin
   methods: ['GET', 'POST'],
   allowedHeaders: ['Content-Type']
 }));
@@ -49,7 +49,7 @@ app.post('/download', async (req, res) => {
     });
 
     res.on('close', () => {
-      stream.destroy(); // Clean up the stream if the client disconnects
+      stream.destroy(); // Clean up if client disconnects
     });
   } catch (error) {
     console.error('Error:', error);
